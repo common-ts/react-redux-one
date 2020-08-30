@@ -1,6 +1,6 @@
 {
   "name": "react-redux-one",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "react",
   "main": "./lib/index.js",
   "types": "./src/index.ts",
@@ -35,8 +35,6 @@
   },
   "keywords": [
     "react",
-    "react-plus",
-    "reactx",
-    "react-core"
+    "react-redux"
   ]
 }

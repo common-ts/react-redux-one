@@ -5,3 +5,4 @@ export * from './DiffApprDispatchProps';
 
 export * from './components';
 export * from './ReduxDiffApprComponent';
+export * from './withReducer';
