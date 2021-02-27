@@ -1,6 +1,6 @@
 {
   "name": "react-redux-one",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "react",
   "main": "./lib/index.js",
   "types": "./src/index.ts",
@@ -15,16 +15,14 @@
     "typescript": "^3.3.3333"
   },
   "peerDependencies": {
-    "form-util": "0.0.5",
+    "form-util": "^0.0.1",
     "query-string": "^6.13.1",
     "react": "^16.8.0",
-    "react-onex": "0.0.8",
+    "react-onex": "^0.0.9",
     "react-router-dom": "^4.3.1",
-    "reflectx": "0.0.9",
-    "search-utilities": "0.0.5",
-    "ui-plus": "0.0.4",
-    "uione": "0.0.7",
-    "validation-util": "0.0.3"
+    "reflectx": "^0.0.9",
+    "search-utilities": "^0.0.5",
+    "validation-util": "^0.0.3"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -35,6 +33,7 @@
   },
   "keywords": [
     "react",
-    "react-redux"
+    "react-redux",
+    "react-redux-one"
   ]
 }

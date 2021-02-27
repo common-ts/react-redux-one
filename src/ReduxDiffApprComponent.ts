@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {BaseDiffApprComponent, BaseDiffState, DiffModel} from 'react-onex';
+import {BaseDiffApprComponent, BaseDiffState, buildKeys, DiffModel, LoadingService, ResourceService} from 'react-onex';
 import {buildId, Metadata} from 'react-onex';
 import {HistoryProps} from 'react-onex';
 import {clone} from 'reflectx';
@@ -12,8 +12,13 @@ interface InternalDiffState<T, ID> {
 export type DiffApprPropsType<T, ID> = InternalDiffState<T, ID> & DiffApprDispatchProps<T, ID> & HistoryProps;
 
 export class ReduxDiffApprComponent<T, ID, W extends DiffApprPropsType<T, ID>, I extends BaseDiffState> extends BaseDiffApprComponent<T, ID, W, I> {
-  constructor(props, metadata: Metadata) {
-    super(props, metadata);
+  constructor(props, metadata: Metadata,
+      resourceService: ResourceService,
+      showMessage: (msg: string) => void,
+      showError: (m: string, title?: string, detail?: string, callback?: () => void) => void,
+      loading?: LoadingService
+    ) {
+    super(props, buildKeys(metadata), resourceService, showMessage, showError, loading);
     this.approve = this.approve.bind(this);
     this.reject = this.reject.bind(this);
     this.formatDiffModel = this.formatDiffModel.bind(this);
@@ -78,20 +83,23 @@ export class ReduxDiffApprComponent<T, ID, W extends DiffApprPropsType<T, ID>, I
   load(_id: ID): void {
     const id: any = _id;
     if (id && id !== '') {
+      const ctx: any = {};
       this.id = _id;
-      this.props.diff({parameter: id, callback: { execute: this.showDiff, handleError: this.handleError, formatData: this.formatDiffModel }});
+      this.props.diff({parameter: id, ctx, callback: { execute: this.showDiff, handleError: this.handleError, formatData: this.formatDiffModel }});
     }
   }
 
   approve(event: any): void {
     event.preventDefault();
+    const ctx: any = {};
     const id = this.id;
-    this.props.approve({parameter: id, callback: { execute: this.postApprove, handleError: this.handleError }});
+    this.props.approve({parameter: id, ctx, callback: { execute: this.postApprove, handleError: this.handleError }});
   }
 
   reject(event: any): void {
     event.preventDefault();
+    const ctx: any = {};
     const id = this.id;
-    this.props.reject({parameter: id, callback: { execute: this.postReject, handleError: this.handleError }});
+    this.props.reject({parameter: id, ctx, callback: { execute: this.postReject, handleError: this.handleError }});
   }
 }
